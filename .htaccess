@@ -1,0 +1,8 @@
+# Настройка сервера
+DirectoryIndex index.php?page=index
+
+# Настройка php
+php_flag asp_tags on
+
+#отключение всех ошибок
+php_flag display_errors off

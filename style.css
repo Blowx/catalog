@@ -1,0 +1,24 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+#footer_div{
+    position: relative;
+    width: 285px;
+    margin-left: 100px;
+}
+
+.copyright{
+    margin-left: 80px;
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+
+
+    align-items: center;
+}
