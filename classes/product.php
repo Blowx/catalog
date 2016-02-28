@@ -20,23 +20,15 @@ class product
         }
     }
 
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-    public function __construct () {
-=======
     public function __construct()
     {
->>>>>>> add edit and delete functions && it works
         $this->pdo = new PDO('sqlite:myDatabase.db');
 
         $this->createDatabase();
     }
 
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-    public function __destruct () {
-=======
     public function __destruct()
     {
->>>>>>> add edit and delete functions && it works
         unset($this->pdo);
     }
 
@@ -57,42 +49,18 @@ class product
     public function fetchData($result)
     {
         $temp = [];
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)){
-=======
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
->>>>>>> add edit and delete functions && it works
             $temp[] = $row;
         }
         return $temp;
     }
 
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-    public function escapeString($str){
-=======
     public function escapeString($str)
     {
->>>>>>> add edit and delete functions && it works
         $stmt = $this->pdo->quote($str);
         return $stmt;
     }
 
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-    public function selectDirectData ($id){
-                $sql = "SELECT * FROM catalog WHERE id='$id'";
-            $stmt = $this->pdo->query($sql);
-        return $this->fetchData($stmt);
-    }
-
-    public function updateData(){
-
-    }
-
-    public function deleteData(){
-        
-    }
-
-=======
     public function selectDirectData($id)
     {
         $sql = "SELECT * FROM catalog WHERE id='$id'";
@@ -118,5 +86,4 @@ class product
         }
 
     }
->>>>>>> add edit and delete functions && it works
 }

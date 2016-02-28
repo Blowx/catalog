@@ -25,8 +25,6 @@ $result = $database->query($sqls);*/
 /*$sql = "SELECT * FROM CATALOG WHERE id='$id'";
 
 $product->exec($sql);*/
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-=======
 
 
 
@@ -45,7 +43,6 @@ if (isPost()) {
         if ($_FILES['userfile']['name'] != null) {
 
             if (in_array($type, $ext)) {
->>>>>>> add edit and delete functions && it works
 
                 if ($error == UPLOAD_ERR_OK) {
                     $title = $_POST['title'];
@@ -81,8 +78,6 @@ if (isPost()) {
 
 //echo $id;
 
-echo $id;
-
 ?>
 
 
@@ -112,11 +107,8 @@ echo $id;
         </table>
     </div>
 
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-=======
-    
+
     <?php foreach ($product->selectDirectData($id) as $row): ?>
->>>>>>> add edit and delete functions && it works
 <form  method="post" action="" enctype="multipart/form-data">
     <div class="form-group">
         <label for="Title">Title</label>
@@ -133,12 +125,9 @@ echo $id;
     <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
     <!--<a href=""></a>-->
     <button type="submit" name='submit' class="btn btn-default">Обновить</button>
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-=======
     <br>
     <!--<a href="index.php?page=delete&id=<?/*= $id */?>">Удалить <?/*= $id */?></a>-->
     <?php endforeach; ?>
->>>>>>> add edit and delete functions && it works
     <br><br>
 </form>
 

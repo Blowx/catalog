@@ -12,10 +12,7 @@ error_reporting(E_ALL);
 потом update
 */
 require "classes/product.php";
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-=======
 require_once 'inc/data.php';
->>>>>>> add edit and delete functions && it works
 $product = new Product();
 require_once 'inc/functions.php';
 
@@ -97,11 +94,7 @@ if (isPost()) {
 
                     <?php if(isCookie('admin')): ?>
                         <td><a href="index.php?page=edit&id=<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
-<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
-                        <td><a href="index.php?page=index?delete=id<?= $row['id'] ?>">Удалить <?= $row['id'] ?></a></td>
-=======
                         <td><a href="index.php?page=delete&id=<?= $row['id'] ?>">Удалить <?= $row['id'] ?></a></td>
->>>>>>> add edit and delete functions && it works
                     <?php endif; ?>
 
                 </tr>

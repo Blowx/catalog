@@ -23,8 +23,9 @@ $result = $database->query($sqls);*/
                 <?= $row['price'] ?>$<br>
                 <?php if(isCookie('admin')): ?>
                     <div  style="border: 1px solid black">
-                        <td><a href="index.php?page=index?edit=id<?= $row['id'] ?>">Изменить <?= $row['id']  ?> (<?= ($row[('title')]) ?>)</a></td><br>
-                        <td><a href="index.php?page=index?edit=id<?= $row['id'] ?>">Удалить <?= $row['id'] ?> (<?= ($row['title']) ?>)</a></td><br>
+                        <td><a href="index.php?page=edit&id=<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
+                        <br>
+                        <td><a href="index.php?page=delete&id=<?= $row['id'] ?>">Удалить <?= $row['id'] ?></a></td>
                     </div>
                 <?php endif; ?>
                 <br>
