@@ -75,7 +75,8 @@ echo $id;
         <input type="file" name="userfile" id="exampleInputFile">
     </div>
     <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-    <button type="submit" name='submit' class="btn btn-default">Загрузить</button>
+    <!--<a href=""></a>-->
+    <button type="submit" name='submit' class="btn btn-default">Обновить</button>
     <br><br>
 </form>
 

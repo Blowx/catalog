@@ -60,4 +60,12 @@ class product
         return $this->fetchData($stmt);
     }
 
+    public function updateData(){
+
+    }
+
+    public function deleteData(){
+        
+    }
+
 }
