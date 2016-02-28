@@ -49,4 +49,9 @@ class product
         return $temp;
     }
 
+    public function escapeString($str){
+        $stmt = $this->pdo->quote($str);
+        return $stmt;
+    }
+
 }

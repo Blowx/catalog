@@ -25,8 +25,8 @@ if (isPost()) {
             if(in_array($type, $ext)){
 
                 if ($error == UPLOAD_ERR_OK) {
-                    $title = mysqli_real_escape_string($_POST['title']);
-                    $price = mysqli_real_escape_string($_POST['price']);
+                    $title = $_POST['title'];
+                    $price = $_POST['price'];
                     $uploadfile =$uploaddir .time() . '_' . basename($_FILES['userfile']['name']);
                     $sql = "INSERT INTO catalog (id, uploadfile , title, price)" .
                         "VALUES (null , '$uploadfile' ,'$title', '$price')";

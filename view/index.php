@@ -24,8 +24,8 @@ if (isPost()) {
     $uploaddir = 'gallery/';
     $uploadfile =$uploaddir .time() . '_' . basename($_FILES['userfile']['name']);
     $error = $_FILES['photo']['error'];
-    $title = getData('title');
-    $price = getData('price');
+    $title = $product->escapeString(getData('title'));
+    $price = $product->escapeString(getData('price'));
     $size = $_FILES['userfile']['size'];
     $type = $_FILES['userfile']['type'];
     if($title !=null && $price != null){
@@ -93,7 +93,7 @@ if (isPost()) {
                     <td><?= $row['price'] ?></td>
                     <td><img src="<?= $row['uploadfile'] ?>" alt="" style='width: 50px; height: 50px'></td>
                     <?php if(isCookie('admin')): ?>
-                        <td><a href="index.php?page=index?edit=id<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
+                        <td><a href="index.php?page=edit?id=<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
                         <td><a href="index.php?page=index?delete=id<?= $row['id'] ?>">Удалить <?= $row['id'] ?></a></td>
                     <?php endif; ?>
                 </tr>
