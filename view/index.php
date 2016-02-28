@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_ALL);
 
-
 /*
  *
  *
@@ -13,10 +12,8 @@ error_reporting(E_ALL);
 */
 require "classes/product.php";
 require_once 'inc/data.php';
-$product = new Product();
 require_once 'inc/functions.php';
-
-
+$product = new Product();
 
 if (isPost()) {
     $imgName = $_FILES['photo']['name'];
@@ -68,8 +65,7 @@ if (isPost()) {
     <h1 style="color: red">Чтобы добавлять товары зайдите в админку</h1><br>
 <?php endif; ?>
 
-
-
+<?php if($product->selectData()): ?>
 <div>
     <div>
         <table class="table table-bordered table-striped table-hover">
@@ -102,8 +98,7 @@ if (isPost()) {
             <?php endforeach; ?>
         </table>
     </div>
-
-
+<?php endif; ?>
 
 <?php if(isCookie('admin')): ?>
 
@@ -130,6 +125,7 @@ if (isPost()) {
         <li class="list-group-item list-group-item-info">Вы можете сохранить файл в формате Jpeg или Png</li>
         <li class="list-group-item list-group-item-info">Вы можете соханить файл не более 3мб</li>
     </ul>
+
 <?php endif; ?>
 
 

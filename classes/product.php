@@ -81,6 +81,8 @@ class product
         if (isset($_GET['id'])) {
             $sql = "DELETE FROM catalog WHERE id='$id'";
             $result = $this->pdo->query($sql);
+
+
         return $result;
 
         }
