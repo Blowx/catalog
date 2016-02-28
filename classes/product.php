@@ -3,7 +3,7 @@ include_once "../inc/functions.php";
 
 class product
 {
-    private $db;
+    private $pdo;
     const DB_NAME = 'myDatabase.db';
 
     private function createDatabase(){
@@ -15,39 +15,49 @@ class product
             price INTEGER
         )';
 
-            $this->db->exec($sql);
+            $this->pdo->exec($sql);
         }
     }
 
     public function __construct () {
-        $this->db = new SQLite3(static::DB_NAME);
+        $this->pdo = new PDO('sqlite:myDatabase.db');
 
         $this->createDatabase();
     }
 
     public function __destruct () {
-        unset($this->db);
+        unset($this->pdo);
     }
 
     public function insertInDB ($uploadfile, $title, $price) {
         $sql = "INSERT INTO catalog (id, uploadfile , title, price)" .
             "VALUES (null , '$uploadfile' ,'$title', '$price')";
-        $this->db->exec($sql);
+        $this->pdo->exec($sql);
     }
 
     public function selectData() {
         $sql = "SELECT * FROM catalog ORDER BY id, title, price";
-        $result = $this->db->query($sql);
-
-        return $this->fetchData($result);
+        $stmt = $this->pdo->query($sql);
+        return $this->fetchData($stmt);
     }
 
     public function fetchData($result){
         $temp = [];
-        while ($row = $result->fetchArray()){
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)){
             $temp[] = $row;
         }
         return $temp;
+    }
+
+    public function escapeString($str){
+        $stmt = $this->pdo->quote($str);
+        return $stmt;
+    }
+
+    public function selectDirectData ($id){
+                $sql = "SELECT * FROM catalog WHERE id='$id'";
+            $stmt = $this->pdo->query($sql);
+        return $this->fetchData($stmt);
     }
 
 }

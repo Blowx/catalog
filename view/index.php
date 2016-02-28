@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 потом будет идти запрос в бд select * where id=%id%
 потом update
 */
-require "classes/productPDO.php";
+require "classes/product.php";
 $product = new Product();
 require_once 'inc/functions.php';
 
@@ -93,7 +93,7 @@ if (isPost()) {
                     <td><?= $row['price'] ?></td>
                     <td><img src="<?= $row['uploadfile'] ?>" alt="" style='width: 50px; height: 50px'></td>
                     <?php if(isCookie('admin')): ?>
-                        <td><a href="index.php?page=edit?id=<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
+                        <td><a href="index.php?page=edit&id=<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
                         <td><a href="index.php?page=index?delete=id<?= $row['id'] ?>">Удалить <?= $row['id'] ?></a></td>
                     <?php endif; ?>
                 </tr>
