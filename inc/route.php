@@ -19,5 +19,7 @@ switch($page){
     case 'edit':
         include 'view/edit.php';
         break;
-
+    case 'delete':
+        include 'view/delete.php';
+        break;
 }

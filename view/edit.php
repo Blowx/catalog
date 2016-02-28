@@ -25,10 +25,61 @@ $result = $database->query($sqls);*/
 /*$sql = "SELECT * FROM CATALOG WHERE id='$id'";
 
 $product->exec($sql);*/
+<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
+=======
 
 
 
 
+if (isPost()) {
+    $imgName = $_FILES['photo']['name'];
+    $uploaddir = 'gallery/';
+    $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
+    $error = $_FILES['photo']['error'];
+    $title = $product->escapeString(getData('title'));
+    $price = $product->escapeString(getData('price'));
+    $size = $_FILES['userfile']['size'];
+    $type = $_FILES['userfile']['type'];
+    if ($title != null && $price != null) {
+
+        if ($_FILES['userfile']['name'] != null) {
+
+            if (in_array($type, $ext)) {
+>>>>>>> add edit and delete functions && it works
+
+                if ($error == UPLOAD_ERR_OK) {
+                    $title = $_POST['title'];
+                    $price = $_POST['price'];
+                    $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
+                    $product->updateData($id, $uploadfile, $title, $price);
+
+                    move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
+
+                    echo "Готово, вы изменили товар." . '<br>';
+                    echo "Название: $title" . '<br>';
+                    echo "Цена: $price" . '<br>';
+
+                } else {
+                    echo "Не-а, не залилось!\n";
+                }
+
+            } else {
+                echo 'Недопустимый формат файла, вы должны сохранить файл в формате jpeg или png';
+            }
+
+        } else {
+            echo 'Вы не выбрали файл ';
+        }
+
+    } else {
+        echo 'Вы не ввели Тайтл или цену';
+    }
+
+}
+
+
+
+//echo $id;
 
 echo $id;
 
@@ -61,14 +112,19 @@ echo $id;
         </table>
     </div>
 
+<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
+=======
+    
+    <?php foreach ($product->selectDirectData($id) as $row): ?>
+>>>>>>> add edit and delete functions && it works
 <form  method="post" action="" enctype="multipart/form-data">
     <div class="form-group">
         <label for="Title">Title</label>
-        <input type="text" class="form-control" name="title" value=""  placeholder="title">
+        <input type="text" class="form-control" name="title" value="<?= $row['title'] ?>"  placeholder="title">
     </div>
     <div class="form-group">
         <label for="Price">Price:</label>
-        <input type="text" class="form-control" name="price" value="" placeholder="price">
+        <input type="text" class="form-control" name="price" value="<?= $row['price'] ?>" placeholder="price">
     </div>
     <div class="form-group">
         <label for="InputFile">Pic</label>
@@ -77,6 +133,12 @@ echo $id;
     <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
     <!--<a href=""></a>-->
     <button type="submit" name='submit' class="btn btn-default">Обновить</button>
+<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
+=======
+    <br>
+    <!--<a href="index.php?page=delete&id=<?/*= $id */?>">Удалить <?/*= $id */?></a>-->
+    <?php endforeach; ?>
+>>>>>>> add edit and delete functions && it works
     <br><br>
 </form>
 

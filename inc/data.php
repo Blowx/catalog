@@ -33,3 +33,6 @@ if(!isCookie('admin')){
 //$page = (isset($_GET['id']))? strip_tags($_GET['id']) : 'id';
 $page = (isset($_GET['page']))? strip_tags($_GET['page']) : 'index';
 
+$ext = [
+    'image/jpeg', 'image/png'
+];

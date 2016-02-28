@@ -12,12 +12,14 @@ error_reporting(E_ALL);
 потом update
 */
 require "classes/product.php";
+<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
+=======
+require_once 'inc/data.php';
+>>>>>>> add edit and delete functions && it works
 $product = new Product();
 require_once 'inc/functions.php';
 
-$ext = [
-    'image/jpeg', 'image/png'
-];
+
 
 if (isPost()) {
     $imgName = $_FILES['photo']['name'];
@@ -67,8 +69,6 @@ if (isPost()) {
 
 <?php if (! isCookie('admin')): ?>
     <h1 style="color: red">Чтобы добавлять товары зайдите в админку</h1><br>
-
-
 <?php endif; ?>
 
 
@@ -87,22 +87,25 @@ if (isPost()) {
                 <?php endif; ?>
             </tr>
             <?php foreach ($product->selectData() as $row ): ?>
+
                 <tr>
+
                     <td><?= $row['id'] ?></td>
                     <td><?= $row['title'] ?></td>
                     <td><?= $row['price'] ?></td>
                     <td><img src="<?= $row['uploadfile'] ?>" alt="" style='width: 50px; height: 50px'></td>
+
                     <?php if(isCookie('admin')): ?>
                         <td><a href="index.php?page=edit&id=<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
+<<<<<<< 5570eb779fc32c7b361b46c1216c297106bfaa28
                         <td><a href="index.php?page=index?delete=id<?= $row['id'] ?>">Удалить <?= $row['id'] ?></a></td>
+=======
+                        <td><a href="index.php?page=delete&id=<?= $row['id'] ?>">Удалить <?= $row['id'] ?></a></td>
+>>>>>>> add edit and delete functions && it works
                     <?php endif; ?>
+
                 </tr>
-                <?php
-                /*if (isset($_GET[$row['name']])) {
-                    $pere = $row['name'];
-                    delete($pere);
-                }*/
-                ?>
+
             <?php endforeach; ?>
         </table>
     </div>
