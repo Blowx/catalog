@@ -18,7 +18,7 @@ $result = $database->query($sqls);*/
         <?php foreach ($product->selectData() as $row ):  ?>
 
             <div class="col-sm-4">
-                <img src="<?= $row['uploadfile'] ?>" style='width: 200px; height: 200px'><br>
+                <a href="index.php?page=singleproduct&id=<?= $row['id'] ?>"><img src="<?= $row['uploadfile'] ?>" style='width: 200px; height: 200px'></a><br>
                 <h4><?= $row['title'] ?></h4>
                 <?= $row['price'] ?>$<br>
                 <?php if(isCookie('admin')): ?>

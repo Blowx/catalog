@@ -22,4 +22,7 @@ switch($page){
     case 'delete':
         include 'view/delete.php';
         break;
+    case 'singleproduct':
+        include 'view/singleproduct.php';
+        break;
 }
