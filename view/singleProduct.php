@@ -8,13 +8,13 @@ $id = (isset($_GET['id']))? strip_tags($_GET['id']) : 'id';
 
 ?>
 
-<div class="container" style="border:0px solid black">
-    <div class="row" style="border:0px solid black">
+<div class="container">
+    <div class="row">
 
     <?php foreach ($product->selectDirectData($id) as $row ): ?>
-            <div  style=" border 0px solid black;">
+            <div>
 
-                <div class="col-md-2" style="border 0px solid black; float: left;">
+                <div class="col-md-2">
                     <img src="<?= $row['uploadfile'] ?>" style='width: 600px; height: 600px'>
                 </div>
                 <br>
@@ -32,9 +32,6 @@ $id = (isset($_GET['id']))? strip_tags($_GET['id']) : 'id';
                         </div>
                     <?php endif; ?>
                 </div>
-
-
-
                 <br>
                 <br>
                 <br>

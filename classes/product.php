@@ -32,6 +32,7 @@ class product
         unset($this->pdo);
     }
 
+
     public function insertInDB($uploadfile, $title, $price)
     {
         $sql = "INSERT INTO catalog (id, uploadfile , title, price)" .
@@ -68,7 +69,7 @@ class product
         return $this->fetchData($stmt);
     }
 
-    public function updateData($id,$uploadfile, $title, $price)
+    public function updateData($id,$uploadfile = '', $title, $price)
     {
         $sql = "UPDATE catalog SET uploadfile='$uploadfile', title='$title', price='$price' WHERE id='$id'";
         $this->pdo->exec($sql);
