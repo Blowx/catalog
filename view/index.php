@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 потом будет идти запрос в бд select * where id=%id%
 потом update
 */
-require "classes/product.php";
+require "classes/productPDO.php";
 $product = new Product();
 require_once 'inc/functions.php';
 
