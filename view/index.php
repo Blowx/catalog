@@ -86,7 +86,7 @@ if (isPost()) {
                     <td><?= $row['id'] ?></td>
                     <td><?= $row['title'] ?></td>
                     <td><?= $row['price'] ?></td>
-                    <td><img src="<?= $row['uploadfile'] ?>" alt="" style='width: 50px; height: 50px'></td>
+                    <td><a href="index.php?page=singleproduct&id=<?= $row['id'] ?>"><img src="<?= $row['uploadfile'] ?>" alt="" style='width: 50px; height: 50px'></a></td>
 
                     <?php if(isCookie('admin')): ?>
                         <td><a href="index.php?page=edit&id=<?= $row['id'] ?>">Изменить <?= $row['id'] ?></a></td>
