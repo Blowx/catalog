@@ -4,9 +4,6 @@ switch ($page) {
     case 'index':
         include 'view/index.php';
         break;
-    case 'test':
-        include 'view/test.php';
-        break;
     case 'catalog':
         include 'view/catalog.php';
         break;

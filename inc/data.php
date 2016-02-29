@@ -1,7 +1,7 @@
 <?php
 $menu = [
-    ['href' => 'index.php?page=index', 'title' => 'Главная + таблица в админе'],
-    ['href' => 'index.php?page=catalog', 'title' => 'catalog'],
+    ['href' => 'index.php?page=index', 'title' => 'Добавление'],
+    ['href' => 'index.php?page=catalog', 'title' => 'Каталог'],
 ];
 
 if (isCookie('admin')) {
@@ -10,6 +10,7 @@ if (isCookie('admin')) {
 }
 
 if (!isCookie('admin')) {
+    array_push($menu, ['href' => '#', 'title' => '|']);
     array_push($menu, ['href' => 'inc/AdminLog.php', 'title' => 'Вход как Админ']);
 }
 
