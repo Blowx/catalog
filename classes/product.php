@@ -1,5 +1,5 @@
 <?php
-include_once "../inc/functions.php";
+include_once "inc/functions.php";
 
 class product
 {
@@ -8,14 +8,13 @@ class product
 
     private function createDatabase()
     {
-        if (filesize(DB_NAME) == 0) {
+        if (filesize(self::DB_NAME) == 0) {
             $sql = 'CREATE TABLE catalog (
             id INTEGER PRIMARY KEY   AUTOINCREMENT,
             uploadfile TEXT,
             title TEXT,
             price INTEGER
         )';
-
             $this->pdo->exec($sql);
         }
     }
@@ -69,7 +68,7 @@ class product
         return $this->fetchData($stmt);
     }
 
-    public function updateData($id,$uploadfile = '', $title, $price)
+    public function updateData($id, $uploadfile = '', $title, $price)
     {
         $sql = "UPDATE catalog SET uploadfile='$uploadfile', title='$title', price='$price' WHERE id='$id'";
         $this->pdo->exec($sql);
@@ -78,14 +77,10 @@ class product
 
     public function del($id)
     {
-        //$id = (isset($_GET['id']))? strip_tags($_GET['id']) : 'id';
         if (isset($_GET['id'])) {
             $sql = "DELETE FROM catalog WHERE id='$id'";
             $result = $this->pdo->query($sql);
-
-
-        return $result;
-
+            return $result;
         }
 
     }

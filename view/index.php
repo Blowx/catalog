@@ -53,7 +53,6 @@ if (isPost()) {
     <div>
         <table class="table table-bordered table-striped table-hover">
             <tr>
-                <th>id</th>
                 <th>title</th>
                 <th>Price</th>
                 <th>dir</th>
@@ -63,31 +62,21 @@ if (isPost()) {
                 <?php endif; ?>
             </tr>
             <?php foreach ($product->selectData() as $row): ?>
-
                 <tr>
-
-                    <td><?= $row['id'] ?></td>
                     <td><a href="index.php?page=singleproduct&id=<?= $row['id'] ?>"><?= $row['title'] ?></a></td>
                     <td><?= $row['price'] ?></td>
-                    <td><a href="index.php?page=singleproduct&id=<?= $row['id'] ?>"><img src="<?= $row['uploadfile'] ?>"
-                                                                                         alt=""
-                                                                                         style='width: 50px; height: 50px'></a>
-                    </td>
-
+                    <td><a href="index.php?page=singleproduct&id=<?= $row['id'] ?>"><img src="<?= $row['uploadfile'] ?>" alt="" style='width: 50px; height: 50px'></a></td>
                     <?php if (isCookie('admin')): ?>
                         <td><a href="index.php?page=edit&id=<?= $row['id'] ?>">Изменить</a></td>
                         <td><a href="index.php?page=delete&id=<?= $row['id'] ?>">Удалить</a></td>
                     <?php endif; ?>
-
                 </tr>
-
             <?php endforeach; ?>
         </table>
     </div>
     <?php endif; ?>
 
     <?php if (isCookie('admin')): ?>
-
         <form method="post" action="" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="Title">Title</label>
@@ -105,13 +94,11 @@ if (isPost()) {
             <button type="submit" name='submit' class="btn btn-default">Загрузить</button>
             <br><br>
         </form>
-
         <ul class="list-group">
             <li class="list-group-item list-group-item-info">Все поля обязательны</li>
             <li class="list-group-item list-group-item-info">Вы можете сохранить файл в формате Jpeg или Png</li>
             <li class="list-group-item list-group-item-info">Вы можете соханить файл не более 3мб</li>
         </ul>
-
     <?php endif; ?>
 
 
