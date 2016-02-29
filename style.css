@@ -22,3 +22,11 @@ body {
 
     align-items: center;
 }
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #cccccc;
+    border-radius: 1px;
+}

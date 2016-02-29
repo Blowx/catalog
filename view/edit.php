@@ -1,34 +1,4 @@
 <?php
-require_once 'inc/functions.php';
-require_once 'inc/data.php';
-require_once "classes/product.php";
-
-$product = new Product;
-/*const DB_NAME ='myDatabase.db';
-$database = new SQLite3(DB_NAME);*/
-
-$id = (isset($_GET['id']))? strip_tags($_GET['id']) : 'id';
-
-/*$sqls = "SELECT * FROM catalog WHERE id='$id'";
-
-$result = $database->query($sqls);*/
-
-
-/*
- *
- * запилиь проверку на ид с регулярками
- * regex101
-*/
-
-//$id = (isset($_GET['id']));
-
-/*$sql = "SELECT * FROM CATALOG WHERE id='$id'";
-
-$product->exec($sql);*/
-
-
-
-
 if (isPost()) {
     $imgName = $_FILES['photo']['name'];
     $uploaddir = 'gallery/';
@@ -49,7 +19,6 @@ if (isPost()) {
                     $price = $_POST['price'];
                     $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
                     $product->updateData($id, $uploadfile, $title, $price);
-
                     move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
 
                     echo "Готово, вы изменили товар." . '<br>';
@@ -59,74 +28,63 @@ if (isPost()) {
                 } else {
                     echo "Не-а, не залилось!\n";
                 }
-
             } else {
                 echo 'Недопустимый формат файла, вы должны сохранить файл в формате jpeg или png';
             }
-
         } else {
             echo 'Вы не выбрали файл ';
         }
-
     } else {
         echo 'Вы не ввели Тайтл или цену';
     }
-
 }
-
-
-
-//echo $id;
-
 ?>
 
+<h1>Редактирование товара</h1><br>
 
+<div class="container">
+    <div class="row">
+        <?php foreach ($product->selectDirectData($id) as $row): ?>
+            <div>
+                <div class="col-md-2">
+                    <img src="<?= $row['uploadfile'] ?>" style='width: 400px; height: 400px'>
+                </div>
+                <br>
+                <div class="col-md-1" style="float: right; margin-right: 500px">
+                    <h3><?= $row['title'] ?></h3>
+                    <h4><?= $row['price'] ?>$</h4>
+                    <?php if (isCookie('admin')): ?>
+                        <div style="margin-top: 100px">
+                            <a href="index.php?page=delete&id=<?= $row['id'] ?>">Удалить</a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <br>
+                <br>
+                <br>
+            </div>
+        <?php endforeach; ?>
 
-<h1>Изменение товара <?= $id; ?></h1>
-
-<div>
-    <div>
-        <table class="table table-bordered table-striped table-hover">
-            <tr>
-                <th>id</th>
-                <th>title</th>
-                <th>Price</th>
-                <th>dir</th>
-
-            </tr>
-            <?php foreach ($product->selectDirectData($id) as $row ): ?>
-                <tr>
-                    <td><?= $row['id'] ?></td>
-                    <td><?= $row['title'] ?></td>
-                    <td><?= $row['price'] ?></td>
-                    <td><img src="<?= $row['uploadfile'] ?>" alt="" style='width: 50px; height: 50px'></td>
-                </tr>
-                <?php
-                    endforeach;
-                ?>
-        </table>
     </div>
+</div>
 
-
+<form method="post" action="" enctype="multipart/form-data">
     <?php foreach ($product->selectDirectData($id) as $row): ?>
-<form  method="post" action="" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="Title">Title</label>
-        <input type="text" class="form-control" name="title" value="<?= $row['title'] ?>"  placeholder="title">
-    </div>
-    <div class="form-group">
-        <label for="Price">Price:</label>
-        <input type="text" class="form-control" name="price" value="<?= $row['price'] ?>" placeholder="price">
-    </div>
-    <div class="form-group">
-        <label for="InputFile">Pic</label>
-        <input type="file" name="userfile" id="exampleInputFile">
-    </div>
-    <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
-    <!--<a href=""></a>-->
-    <button type="submit" name='submit' class="btn btn-default">Обновить</button>
-    <br>
-    <!--<a href="index.php?page=delete&id=<?/*= $id */?>">Удалить <?/*= $id */?></a>-->
+        <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text" class="form-control" name="title" value="<?= $row['title'] ?>" placeholder="title">
+        </div>
+        <div class="form-group">
+            <label for="Price">Price:</label>
+            <input type="text" class="form-control" name="price" value="<?= $row['price'] ?>" placeholder="price">
+        </div>
+        <div class="form-group">
+            <label for="InputFile">Pic</label>
+            <input type="file" name="userfile" id="exampleInputFile">
+        </div>
+        <input type="hidden" name="MAX_FILE_SIZE" value="3000000"/>
+        <button type="submit" name='submit' class="btn btn-default">Обновить</button>
+        <br>
     <?php endforeach; ?>
     <br><br>
 </form>
