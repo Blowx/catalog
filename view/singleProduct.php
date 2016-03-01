@@ -12,8 +12,6 @@
                     <h3><?= $row['title'] ?></h3>
                     <h4><?= $row['price'] ?>$</h4>
                     <?php if (isCookie('admin')): ?>
-
-
                         <div style="margin-top: 100px">
                             <a href="index.php?page=edit&id=<?= $row['id'] ?>">Изменить</a>
                             <br>
@@ -29,3 +27,5 @@
 
     </div>
 </div>
+
+

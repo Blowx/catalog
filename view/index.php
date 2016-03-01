@@ -1,9 +1,9 @@
 <?php
 if (isPost()) {
-    $imgName = $_FILES['photo']['name'];
+    $imgName = $_FILES['userfile']['name'];
     $uploaddir = 'gallery/';
     $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
-    $error = $_FILES['photo']['error'];
+    $error = $_FILES['userfile']['error'];
     $title = $product->escapeString(getData('title'));
     $price = $product->escapeString(getData('price'));
     $size = $_FILES['userfile']['size'];

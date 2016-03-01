@@ -5,4 +5,4 @@ DirectoryIndex index.php?page=index
 php_flag asp_tags on
 
 #отключение всех ошибок
-#php_flag display_errors off
+php_flag display_errors off
