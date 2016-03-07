@@ -11,7 +11,7 @@ class Add{
     private $type;
     private $ext;
     private $pdo;
-
+    private $errArray = [];
 
     public function __construct()
     {
@@ -29,56 +29,62 @@ class Add{
         return $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
     }
 
-
     protected function isNotEmptyFields()
     {
-        return $this->title != null && $this->price != null;
+        return isset($this->title, $this->price) ;
     }
 
-    public function insertInDB($uploadfile, $title, $price)
+    protected function userFileIsNotEmpty()
     {
-        $sql = "INSERT INTO catalog (id, uploadfile , title, price)" .
-            "VALUES (null , '$uploadfile' ,'$title', '$price')";
-        $this->pdo->exec($sql);
+        return $_FILES['userfile']['name'] != null;
     }
 
-
-    public function save($uploadfile, $title, $price)
+    protected function allStructures()
     {
+        return $this->isNotEmptyFields() && $this->userFileIsNotEmpty() && in_array($this->type, $this->ext) && $this->size < 3000000 && $this->error == UPLOAD_ERR_OK;
+    }
+
+    public function outputData($title, $price)
+    {
+        echo "Вы добавили товар $title, с ценой $price";
+    }
+
+    public function error()
+    {
+        if($this->isNotEmptyFields()){
+            if($this->userFileIsNotEmpty()){
+                if(!in_array($this->type, $this->ext)){
+                    if(!$this->size < 3000000){
+                        $tmp = "размер больше 3мб";
+                        $this->errArray[] = $tmp;
+                    }
+                    $tmp = "Не тот тип файла";
+                    $this->errArray[] = $tmp;
+                }
+                $tmp = "вы не выбрали файл";
+                $this->errArray[] = $tmp;
+            }
+            $tmp = "Не заполнены все поля";
+            $this->errArray[] = $tmp;
+        }
+        $brSep = implode("<br>", $this->errArray);
+        echo $brSep;
+
+    }
+
+    public function save ($uploadfile, $title, $price){
         $uploaddir = 'gallery/';
         $uploadfile = $this->makeDir($uploaddir);
-        if ($this->isNotEmptyFields()) {
 
-            if ($_FILES['userfile']['name'] != null) {
+        if(!($this->errArray) && $this->allStructures()){
+            $sql = "INSERT INTO catalog (id, uploadfile , title, price)" .
+                "VALUES (null , '$uploadfile' ,'$title', '$price')";
+            $this->pdo->exec($sql);
+            move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
+            $this->outputData($title,$price);
 
-                if (in_array($this->type, $this->ext) && $this->size < 3000000) {
-
-                    if ($this->error == UPLOAD_ERR_OK) {
-                        $sql = "INSERT INTO catalog (id, uploadfile , title, price)" .
-                            "VALUES (null , '$uploadfile' ,'$title', '$price')";
-                        $this->pdo->exec($sql);
-
-                        move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
-
-                        echo "Готово, вы добавили товар." . '<br>';
-                        echo "Название: $title" . '<br>';
-                        echo "Цена: $price" . '<br>';
-
-                    } else {
-                        echo "Не-а, не залилось!\n";
-                    }
-
-                } else {
-                    echo 'Недопустимый формат файла, вы должны сохранить файл в формате jpeg или png или размер больше 3мб';
-                }
-
-            } else {
-                echo 'Вы не выбрали файл ';
-            }
-
-        } else {
-            echo 'Вы не ввели Тайтл или цену';
+        }else{
+            $this->error();
         }
     }
-
 }

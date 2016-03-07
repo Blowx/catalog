@@ -56,7 +56,7 @@ if (isPost()) {
             </div>
             <div class="form-group">
                 <label for="Price">Price:</label>
-                <input type="text" class="form-control" name="price" value="" placeholder="price">
+                <input type="number" class="form-control" name="price" value="" placeholder="price">
             </div>
             <div class="form-group">
                 <label for="InputFile">Pic</label>
