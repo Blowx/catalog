@@ -31,17 +31,12 @@ class Add{
 
     protected function isNotEmptyFields()
     {
-        return isset($this->title, $this->price) ;
-    }
-
-    protected function userFileIsNotEmpty()
-    {
-        return $_FILES['userfile']['name'] != null;
+        return ($this->title != null && $this->price != null && $_FILES['userfile']['name'] != null) ;
     }
 
     protected function allStructures()
     {
-        return $this->isNotEmptyFields() && $this->userFileIsNotEmpty() && in_array($this->type, $this->ext) && $this->size < 3000000 && $this->error == UPLOAD_ERR_OK;
+        return $this->isNotEmptyFields() && in_array($this->type, $this->ext) && $this->size < 3000000 && $this->error == UPLOAD_ERR_OK;
     }
 
     protected function outputData($title, $price)
@@ -49,40 +44,33 @@ class Add{
         echo "Вы добавили товар $title, с ценой $price";
     }
 
-    protected function error()
+    public function error()
     {
-        if($this->isNotEmptyFields()){
-            if($this->userFileIsNotEmpty()){
-                if(!in_array($this->type, $this->ext)){
-                    if(!$this->size < 3000000){
-                        $tmp = "размер больше 3мб";
-                        $this->errArray[] = $tmp;
-                    }
-                    $tmp = "Не тот тип файла";
-                    $this->errArray[] = $tmp;
-                }
-                $tmp = "вы не выбрали файл";
+        if(!$this->isNotEmptyFields()){
+            $tmp = "Не заполнены все поля.";
+            $this->errArray[] = $tmp;
+            if($this->size > 3000000){
+                $tmp = "Размер больше 3мб.";
                 $this->errArray[] = $tmp;
             }
-            $tmp = "Не заполнены все поля";
+        }else{
+            $tmp = "Неправильный тип файла. Только Jpeg и Png.";
             $this->errArray[] = $tmp;
         }
         $brSep = implode("<br>", $this->errArray);
         echo $brSep;
-
     }
 
     public function save ($uploadfile, $title, $price){
         $uploaddir = 'gallery/';
         $uploadfile = $this->makeDir($uploaddir);
 
-        if(!($this->errArray) && $this->allStructures()){
+        if($this->allStructures()){
             $sql = "INSERT INTO catalog (id, uploadfile , title, price)" .
                 "VALUES (null , '$uploadfile' ,'$title', '$price')";
             $this->pdo->exec($sql);
             move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
             $this->outputData($title,$price);
-
         }else{
             $this->error();
         }
