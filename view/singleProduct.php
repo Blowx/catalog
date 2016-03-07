@@ -29,3 +29,36 @@
 </div>
 
 
+<?php
+
+
+
+?>
+<pre>
+    <?php echo($product->getPicName($id)) ;
+
+     //$product->test($product->getPicName($id)); ?>
+<?php
+
+//$product->test($product->getPicName($id);
+//$product->test($product->getPicName($id))
+
+?>
+
+</pre>
+    <?php
+/*$name = $product->getPicName($id);
+$dir = "gallery/";
+        $file = $product->getPicName($id);
+            $files1 =scandir($dir);
+if (in_array($name ,$files1)){
+    unlink(__DIR__ . "/../gallery/$file");
+    unlink(__DIR__ .  '/gallery/' . "$name");
+    echo "da";
+}
+else{
+    echo "ne";
+}*/
+        //print_r($files1);
+ ?>
+

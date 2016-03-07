@@ -1,46 +1,18 @@
 <?php
+
+
+//(new AddPhotoToCatalog($_FILES))->save();
+/*создать класс, переписать всю реализацию сюда
+ *
+ *
+ *
+ * */
+
 if (isPost()) {
-    $imgName = $_FILES['userfile']['name'];
-    $uploaddir = 'gallery/';
-    $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
-    $error = $_FILES['userfile']['error'];
-    $title = $product->escapeString(getData('title'));
-    $price = $product->escapeString(getData('price'));
-    $size = $_FILES['userfile']['size'];
-    $type = $_FILES['userfile']['type'];
-    if ($title != null && $price != null) {
-
-        if ($_FILES['userfile']['name'] != null) {
-
-            if (in_array($type, $ext)) {
-
-                if ($error == UPLOAD_ERR_OK) {
-                    $title = $_POST['title'];
-                    $price = $_POST['price'];
-                    $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
-                    $product->insertInDB($uploadfile, $title, $price);
-
-                    move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
-
-                    echo "Готово, вы добавили товар." . '<br>';
-                    echo "Название: $title" . '<br>';
-                    echo "Цена: $price" . '<br>';
-
-                } else {
-                    echo "Не-а, не залилось!\n";
-                }
-
-            } else {
-                echo 'Недопустимый формат файла, вы должны сохранить файл в формате jpeg или png';
-            }
-
-        } else {
-            echo 'Вы не выбрали файл ';
-        }
-
-    } else {
-        echo 'Вы не ввели Тайтл или цену';
-    }
+    $AddPhotoToCatalog = new Add();
+    $title = $_POST['title'];
+    $price = $_POST['price'];
+    $AddPhotoToCatalog->save($_FILES['userfile']['name'], $title, $price);
 }
 ?>
 

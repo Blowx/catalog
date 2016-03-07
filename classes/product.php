@@ -1,7 +1,7 @@
 <?php
 include_once "inc/functions.php";
 
-class product
+class Product
 {
     private $pdo;
     const DB_NAME = 'myDatabase.db';
@@ -43,16 +43,7 @@ class product
     {
         $sql = "SELECT * FROM catalog ORDER BY id, title, price";
         $stmt = $this->pdo->query($sql);
-        return $this->fetchData($stmt);
-    }
-
-    public function fetchData($result)
-    {
-        $temp = [];
-        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-            $temp[] = $row;
-        }
-        return $temp;
+        return $stmt->fetchAll();
     }
 
     public function escapeString($str)
@@ -65,7 +56,8 @@ class product
     {
         $sql = "SELECT * FROM catalog WHERE id='$id'";
         $stmt = $this->pdo->query($sql);
-        return $this->fetchData($stmt);
+        return $stmt->fetchAll();
+
     }
 
     public function updateData($id, $uploadfile, $title, $price)
@@ -79,7 +71,7 @@ class product
     {
         $sql = "SELECT uploadfile FROM catalog WHERE id='$id'";
         $stmt = $this->pdo->query($sql);
-        $stmt = $this->fetchData($stmt);
+        $stmt = $stmt->fetchAll();
 
         $file = $stmt[0]['uploadfile'];
 

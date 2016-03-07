@@ -6,6 +6,7 @@ include 'inc/seo.php';
 require 'autoload.php';
 
 $product = new Product();
+
 ?>
 
 <!doctype html>
