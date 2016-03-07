@@ -44,12 +44,12 @@ class Add{
         return $this->isNotEmptyFields() && $this->userFileIsNotEmpty() && in_array($this->type, $this->ext) && $this->size < 3000000 && $this->error == UPLOAD_ERR_OK;
     }
 
-    public function outputData($title, $price)
+    protected function outputData($title, $price)
     {
         echo "Вы добавили товар $title, с ценой $price";
     }
 
-    public function error()
+    protected function error()
     {
         if($this->isNotEmptyFields()){
             if($this->userFileIsNotEmpty()){

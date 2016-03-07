@@ -16,8 +16,6 @@ function drawMenu($menu)
     echo "</ul>";
 }
 
-;
-
 function isCookie($key)
 {
     return isset($_COOKIE[$key]);

@@ -46,12 +46,6 @@ class Product
         return $stmt->fetchAll();
     }
 
-    public function escapeString($str)
-    {
-        $stmt = $this->pdo->quote($str);
-        return $stmt;
-    }
-
     public function selectDirectData($id)
     {
         $sql = "SELECT * FROM catalog WHERE id='$id'";

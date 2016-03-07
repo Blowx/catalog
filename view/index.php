@@ -1,13 +1,4 @@
 <?php
-
-
-//(new AddPhotoToCatalog($_FILES))->save();
-/*создать класс, переписать всю реализацию сюда
- *
- *
- *
- * */
-
 if (isPost()) {
     $AddPhotoToCatalog = new Add();
     $title = $_POST['title'];
