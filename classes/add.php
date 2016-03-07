@@ -4,7 +4,6 @@ require_once 'inc/data.php';
 class Add{
 
     private $imgname;
-    private $error;
     private $title;
     private $price;
     private $size;
@@ -31,12 +30,12 @@ class Add{
 
     protected function isNotEmptyFields()
     {
-        return ($this->title != null && $this->price != null && $_FILES['userfile']['name'] != null) ;
+        return ($this->title != null && $this->price != null && $this->imgname != null) ;
     }
 
     protected function allStructures()
     {
-        return $this->isNotEmptyFields() && in_array($this->type, $this->ext) && $this->size < 3000000 && $this->error == UPLOAD_ERR_OK;
+        return $this->isNotEmptyFields() && in_array($this->type, $this->ext) && $this->size < 3000000;
     }
 
     protected function outputData($title, $price)
