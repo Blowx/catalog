@@ -74,4 +74,46 @@ class Add{
             $this->error();
         }
     }
+
+    public function getPicName($id)
+    {
+        $sql = "SELECT uploadfile FROM catalog WHERE id='$id'";
+        $stmt = $this->pdo->query($sql);
+        $stmt = $stmt->fetchAll();
+
+        $file = $stmt[0]['uploadfile'];
+
+        $re = "@gallery/(\\w+.[png|jpg|jpeg]*)$@";
+        $subst = "$1";
+        $result = preg_replace($re, $subst, $file, 1);
+        return $result;
+    }
+
+    public function deleteFile($result)
+    {
+        $filename = "gallery/$result";
+
+
+        if (file_exists($filename)) {
+            unlink($filename); //удаляет файл
+        } else {
+            echo "Файл $filename не существует";
+        }
+    }
+
+    public function updateData($id, $uploadfile, $title, $price)
+    {
+        $uploaddir = 'gallery/';
+        $uploadfile = $this->makeDir($uploaddir);
+        if($this->allStructures()){
+            $this->deleteFile($this->getPicName($id));
+            $sql = "UPDATE catalog SET uploadfile='$uploadfile', title='$title', price='$price' WHERE id='$id'";
+            move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
+            $this->pdo->exec($sql);
+        }else{
+            $this->error();
+        }
+
+
+    }
 }

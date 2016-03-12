@@ -1,42 +1,10 @@
 <?php
 if (isPost()) {
-    $imgName = $_FILES['photo']['name'];
-    $uploaddir = 'gallery/';
-    $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
-    $error = $_FILES['photo']['error'];
-    $title = $product->escapeString(getData('title'));
-    $price = $product->escapeString(getData('price'));
-    $size = $_FILES['userfile']['size'];
-    $type = $_FILES['userfile']['type'];
-    if ($title != null && $price != null) {
-
-        if ($_FILES['userfile']['name'] != null) {
-
-            if (in_array($type, $ext)) {
-
-                if ($error == UPLOAD_ERR_OK) {
-                    $title = $_POST['title'];
-                    $price = $_POST['price'];
-                    $uploadfile = $uploaddir . time() . '_' . basename($_FILES['userfile']['name']);
-                    $product->updateData($id, $uploadfile, $title, $price);
-                    move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile);
-
-                    echo "Готово, вы изменили товар." . '<br>';
-                    echo "Название: $title" . '<br>';
-                    echo "Цена: $price" . '<br>';
-
-                } else {
-                    echo "Не-а, не залилось!\n";
-                }
-            } else {
-                echo 'Недопустимый формат файла, вы должны сохранить файл в формате jpeg или png';
-            }
-        } else {
-            echo 'Вы не выбрали файл ';
-        }
-    } else {
-        echo 'Вы не ввели Тайтл или цену';
-    }
+    $AddPhotoToCatalog = new Add();
+    $title = $_POST['title'];
+    $price = $_POST['price'];
+    $uploadfile = $_FILES['userfile']['name'];
+    $AddPhotoToCatalog->updateData($id, $uploadfile, $title, $price);
 }
 ?>
 
@@ -76,11 +44,11 @@ if (isPost()) {
         </div>
         <div class="form-group">
             <label for="Price">Price:</label>
-            <input type="text" class="form-control" name="price" value="<?= $row['price'] ?>" placeholder="price">
+            <input type="number" class="form-control" name="price" value="<?= $row['price'] ?>" placeholder="price">
         </div>
         <div class="form-group">
             <label for="InputFile">Pic</label>
-            <input type="file" name="userfile" id="exampleInputFile">
+            <input type="file" name="userfile" id="exampleInputFile" value="<?= $row['uploadfile'] ?>">
         </div>
         <input type="hidden" name="MAX_FILE_SIZE" value="3000000"/>
         <button type="submit" name='submit' class="btn btn-default">Обновить</button>
