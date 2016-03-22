@@ -1,13 +1,13 @@
 <?php
 ob_start();
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 require_once "inc/functions.php";
 require_once 'inc/data.php';
 include 'inc/seo.php';
 require 'autoload.php';
 
 $product = new Product();
-//$AddPhotoToCatalog = new Add();
+
 
 ?>
 
@@ -47,3 +47,6 @@ $product = new Product();
     </div>
     <hr>
 </div>
+
+</body>
+</html>
